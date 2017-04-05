@@ -19,10 +19,7 @@
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
-            'googleMapsKey' => env('GOOGLE_MAPS_API'),
-            'events' => Cache::remember('events', 60, function () {
-                return App\CalendarEvent::get();
-            })
+            'googleMapsKey' => env('GOOGLE_MAPS_API')
         ]) !!};
     </script>
 </head>
