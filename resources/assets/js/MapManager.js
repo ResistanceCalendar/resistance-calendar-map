@@ -124,7 +124,7 @@ var Event = (function($) { return function(properties) {
               <h5 class="event-type">${that.props.event_type}</h5>
               <p>${that.props.address}</p>
               <div>
-                <a class="rsvp-link" href="${that.props.url}" target="_blank">RSVP</a>
+                <a class="rsvp-link" href="${that.props.url}" target="_blank">EVENT DETAILS</a>
               </div>
             </div>
             `);
