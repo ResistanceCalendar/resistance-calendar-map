@@ -29,12 +29,11 @@
   display: none;
   @media screen and (max-width: 600px) {
     display: inline-block;
-    background-color: #001d59;
     margin: 5%;
     padding: 5%;
     border-radius: 7px;
     font-size: 30px;
-    color: white;
+    color: black;
     font-weight: 100;
     line-height: 1.25;
 
@@ -1369,8 +1368,13 @@ footer {
     }
 
     html article#events div#filters, body article#events div#filters {
-      background-color: rgb(60, 108, 146);
+      background-color: $pink;
       h5 { color: white;}
+    }
+
+    div#filters form#filter-form a {
+      background-color: white;
+      color: $pink;
     }
 
     html article#events div#filters h4, body article#events div#filters h4 {

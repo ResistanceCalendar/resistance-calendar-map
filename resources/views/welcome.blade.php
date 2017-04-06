@@ -40,7 +40,7 @@
       </h3>
       <h4 class='lato title'>
         <span id='screen-title'>Filters</span>
-        <span id='mobile-title'>IndivisibleGuide</span>
+        <span id='mobile-title'>Resistance Calendar</span>
       </h4>
       <form id='filter-form'>
         <table>
@@ -93,13 +93,6 @@
             </p>
           </div>
         </div>
-        <nav id='mobile-nav'>
-          <ul id="nav">
-            <li><a href="https://actionnetwork.org/forms/register-local-group?clear_id=true" class="contribute" target="_blank">Register a<br/>Group</a></li>
-            <li><a href="https://actionnetwork.org/events/new?event_campaign_id=2365" class="contribute" target="_blank">Host a<br/>Meeting</a></li>
-            <li><a href="https://actionnetwork.org/events/new?event_campaign_id=2367" class="contribute" target="_blank">Plan an<br/>Action</a></li>
-          </ul>
-        </nav>
       </form>
     </div>
     <div id='event-list-container'>
