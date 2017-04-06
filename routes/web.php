@@ -15,9 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('import', function() {
-	DB::table('calendar_events')->truncate();
-	$response = json_decode(file_get_contents("https://resistance-calendar.herokuapp.com/v1/events?per_page=5000"));
+Route::post('import', function(Request $request) {
+	if(request()->input('truncate') === true) {
+		DB::table('calendar_events')->truncate();
+	}
+
+	$response = json_decode(file_get_contents(request()->input('url')));
 	$events = $response->{'_embedded'}->{'osdi:events'};
 
 	foreach($events as $event) {
@@ -26,12 +29,9 @@ Route::get('import', function() {
 		$model->save();
 	}
 
-	return "Events imported";
-});
-
-Route::get('clearcache', function() {
 	Artisan::call('cache:clear');
-	return "Cache cleared";
+
+	return "Events imported";
 });
 
 Route::get('events', function() {

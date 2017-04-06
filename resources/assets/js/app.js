@@ -15,6 +15,7 @@ require('./bootstrap');
 
 Vue.component('map-view', require('./components/Map.vue'));
 Vue.component('filter-view', require('./components/Filter.vue'));
+Vue.component('import-form', require('./components/ImportForm.vue'));
 
 import * as VueGoogleMaps from 'vue2-google-maps';
 

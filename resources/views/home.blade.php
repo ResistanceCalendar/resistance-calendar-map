@@ -6,8 +6,9 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
-
                 <div class="panel-body">
+                    <import-form></import-form>
+                    <hr>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="panel panel-primary">
@@ -24,9 +25,6 @@
                             </div>
                         </div>
                     </div>
-                    <hr>
-                    <a class="btn btn-primary" href="/import">Truncate &amp; import</a>
-                    <a class="btn btn-primary" href="/clearcache">Clear cache</a>
                 </div>
             </div>
         </div>
