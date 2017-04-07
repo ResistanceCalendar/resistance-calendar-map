@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('import', function(Request $request) {
+Route::post('import/OSDI', function(Request $request) {
 	if(request()->input('truncate') === true) {
 		DB::table('calendar_events')->truncate();
 	}

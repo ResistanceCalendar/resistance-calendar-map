@@ -7,8 +7,6 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
                 <div class="panel-body">
-                    <import-form></import-form>
-                    <hr>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="panel panel-primary">
@@ -25,6 +23,7 @@
                             </div>
                         </div>
                     </div>
+                    <import-form></import-form>
                 </div>
             </div>
         </div>
