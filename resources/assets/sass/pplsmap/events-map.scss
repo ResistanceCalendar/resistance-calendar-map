@@ -602,7 +602,7 @@ article#events {
                 }
               }
 
-              &[for=general-event] {
+              &[for=other-event] {
                 .circle-button {
                   &.default-on {
                     background-color: $pink;

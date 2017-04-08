@@ -24,7 +24,7 @@
   <div class="main-title-area">
     <div style="margin-bottom: 4px;">
       <div id='spiel'>
-        <strong>Resistance Calendar</strong><br>
+        <img src="/images/logo.png" alt="" style="width: 50%">
       </div>
     </div>
   </div>
@@ -161,8 +161,12 @@ window.eventTypeFilters = [
   //   offItem: "<img style='width: 14px; height: 14px;' src='//d2bq2yf31lju3q.cloudfront.net/img/icon/star-gray.png' />"
   // },
   {
-    name: 'General Event',
-    id: 'general-event'
+    name: 'Facebook Event',
+    id: 'facebook-event'
+  },
+  {
+    name: 'Other Event',
+    id: 'other-event'
   }
 ];
 </script>
@@ -184,7 +188,8 @@ $.ajax({
             d.filters = [];
             //Set filter info
             switch(d.event_type) {
-              case "General Event": d.filters.push('general-event'); break;
+              case "Facebook Event": d.filters.push('facebook-event'); break;
+              case "Other Event": d.filters.push('other-event'); break;
               case "Group Meeting": d.filters.push('group-meeting'); break;
               case "Indivisible Action": d.filters.push("indivisible-action"); break;
               case "Group": d.filters.push("group"); break;

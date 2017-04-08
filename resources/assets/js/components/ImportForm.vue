@@ -21,6 +21,7 @@
             </div>
         <div v-if="step == 1">
             <button class="btn btn-info" @click="setType('OSDI')">OSDI</button>
+            <button class="btn btn-info" @click="setType('events-etl')">events-etl</button>
         </div>
         <div v-if="step == 2">
             <div class="input-group">

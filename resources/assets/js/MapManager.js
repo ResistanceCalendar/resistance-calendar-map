@@ -280,7 +280,12 @@ var MapManager = (function($, d3, leaflet) {
           //     .on('click', function(e) { _popupEvents(e); })
           //     .addTo(overlays);
           // }
-          if (item.className == 'general-event') {
+          if (item.className == 'facebook-event') {
+            L.circleMarker(item.latLng, { radius: 5, className: item.className, color: 'white', fillColor: '#1462A2', opacity: 0.8, fillOpacity: 0.7, weight: 2 })
+              .on('click', function(e) { _popupEvents(e); })
+              .addTo(overlays);
+          }
+          else if (item.className == 'other-event') {
             L.circleMarker(item.latLng, { radius: 5, className: item.className, color: 'white', fillColor: '#ec3659', opacity: 0.8, fillOpacity: 0.7, weight: 2 })
               .on('click', function(e) { _popupEvents(e); })
               .addTo(overlays);
