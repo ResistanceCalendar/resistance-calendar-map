@@ -46,7 +46,7 @@ Route::post('import/events-etl', function(Request $request) {
 		$model = new App\CalendarEvent;
 		$extraData = [
 			'formatType' => 'events-etl',
-			"event_type" => $event->{'event_type'} == 'Indivisible Action' ? 'Event' : $event->{'event_type'}
+			'event_type' => $event->{'event_type'} == 'Indivisible Action' ? 'Event' : $event->{'event_type'}
 		];
 		$model->event = (object) array_merge((array) $event, (array) $extraData);
 		$model->save();
@@ -64,15 +64,16 @@ Route::get('events', function() {
 	    	if(!isset($event['event']['formatType'])) {
 	    		if(isset($event['event']['location']['location']['coordinates'])) {
 	    			array_push($events, [
-	    				"start_datetime" => $event["event"]["start_date"],
-	    				"url" => "https://facebook.com/events/" . substr($event['event']['identifiers'][0], 9),
-	    				"venue" => "",
-	    				"group" => null,
-	    				'title' => $event['event']['title'],
-	    				'lat' => isset($event['event']['location']['location']['coordinates'][1]) ? $event['event']['location']['location']['coordinates'][1] : "",
-	    				'lng' => isset($event['event']['location']['location']['coordinates'][0]) ? $event['event']['location']['location']['coordinates'][0] : "",
-	    				"supergroup" => "Indivisible",
-	    				'event_type' => "Event"
+	    				'start_datetime' => $event['event']['start_date'],
+	    				'url'            => 'https://facebook.com/events/' . substr($event['event']['identifiers'][0], 9),
+	    				'venue'          => '',
+	    				'group'          => null,
+	    				'title'          => $event['event']['title'],
+	    				'lat'            => isset($event['event']['location']['location']['coordinates'][1]) ? $event['event']['location']['location']['coordinates'][1] : '',
+	    				'lng'            => isset($event['event']['location']['location']['coordinates'][0]) ? $event['event']['location']['location']['coordinates'][0] : '',
+	    				'supergroup'     => 'Indivisible',
+	    				'event_type'     => 'Event',
+	    				'attending'      => isset($event['event']['total_accepted']) ? $event['event']['total_accepted'] : null,
 	    			]);
 	    		}
 	    	}

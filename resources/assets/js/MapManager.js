@@ -45,6 +45,8 @@ var Event = (function($) { return function(properties) {
         twitter: properties.twitter 
       };
 
+      this.props.attending = properties.attending
+
       
       
       this.render = function (distance, zipcode) {
@@ -109,6 +111,8 @@ var Event = (function($) { return function(properties) {
         var datetime = moment(that.props.start_time).format("MMM DD (ddd) h:mma");
         var lat = that.props.lat
         var lon = that.props.lng
+
+        var attendingText = typeof that.props.attending !== 'undefined' ? "- " + that.props.attending + " RSVPs" : ""
         
         var rendered = $("<div class=montserrat/>")
           .addClass('event-item ' + that.className)
@@ -121,7 +125,7 @@ var Event = (function($) { return function(properties) {
                 <a target="_blank" href="${that.props.url}">${that.props.title}</a>
               </h3>
               <span class="label-icon"></span>
-              <h5 class="event-type">${that.props.event_type}</h5>
+              <h5 class="event-type">${that.props.event_type} ${attendingText}</h5>
               <p>${that.props.address}</p>
               <div>
                 <a class="rsvp-link" href="${that.props.url}" target="_blank">DETAILS</a>
