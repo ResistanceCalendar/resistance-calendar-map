@@ -124,7 +124,7 @@ var Event = (function($) { return function(properties) {
               <h5 class="event-type">${that.props.event_type}</h5>
               <p>${that.props.address}</p>
               <div>
-                <a class="rsvp-link" href="${that.props.url}" target="_blank">EVENT DETAILS</a>
+                <a class="rsvp-link" href="${that.props.url}" target="_blank">DETAILS</a>
               </div>
             </div>
             `);
@@ -280,22 +280,17 @@ var MapManager = (function($, d3, leaflet) {
           //     .on('click', function(e) { _popupEvents(e); })
           //     .addTo(overlays);
           // }
-          if (item.className == 'facebook-event') {
-            L.circleMarker(item.latLng, { radius: 5, className: item.className, color: 'white', fillColor: '#1462A2', opacity: 0.8, fillOpacity: 0.7, weight: 2 })
-              .on('click', function(e) { _popupEvents(e); })
-              .addTo(overlays);
-          }
-          else if (item.className == 'other-event') {
+          if (item.className == 'event') {
             L.circleMarker(item.latLng, { radius: 5, className: item.className, color: 'white', fillColor: '#ec3659', opacity: 0.8, fillOpacity: 0.7, weight: 2 })
               .on('click', function(e) { _popupEvents(e); })
               .addTo(overlays);
           } else if (item.className == 'group-meeting') {
-            L.circleMarker(item.latLng, { radius: 5, className: item.className, color: 'white', fillColor: '#e71029', opacity: 0.8, fillOpacity: 0.7, weight: 2 })
+            L.circleMarker(item.latLng, { radius: 5, className: item.className, color: 'white', fillColor: 'black', opacity: 0.8, fillOpacity: 0.7, weight: 2 })
               .on('click', function(e) { _popupEvents(e); })
               .addTo(overlays);
           } 
           else if (item.className == 'group') {
-            L.circleMarker(item.latLng, { radius: 4, className: item.className, color: 'white', fillColor: '#1462A2', opacity: 0.6, fillOpacity: 0.9, weight: 2 })
+            L.circleMarker(item.latLng, { radius: 4, className: item.className, color: 'white', fillColor: 'lightgray', opacity: 0.6, fillOpacity: 0.9, weight: 2 })
             .on('click', function(e) { _popupEvents(e); })
             .addTo(overlays);
           } else {

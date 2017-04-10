@@ -3,6 +3,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="description" content="Organize. Resist. Repeat">
+<link href="https://daks2k3a4ib2z.cloudfront.net/5890e0241852b1404af8762d/58cdd2a2f552f26c3893f4bf_RC-32.png" rel="shortcut icon" type="image/x-icon">
 <meta property="og:image" content="https://global-uploads.webflow.com/5890e0241852b1404af8762d/58cdccb6df096f59381703bf_Screenshot%202017-03-18%2013.50.36-p-500x500.png" />
 <meta property="og:url" content="https://resistancecalendar.org/" />
 <meta property="og:title" content="Resistance Calendar"/>
@@ -161,12 +162,16 @@ window.eventTypeFilters = [
   //   offItem: "<img style='width: 14px; height: 14px;' src='//d2bq2yf31lju3q.cloudfront.net/img/icon/star-gray.png' />"
   // },
   {
-    name: 'Facebook Event',
-    id: 'facebook-event'
+    name: 'Event',
+    id: 'event'
   },
   {
-    name: 'Other Event',
-    id: 'other-event'
+    name: 'Group',
+    id: 'group'
+  },
+  {
+    name: 'Group Meeting',
+    id: 'group-meeting'
   }
 ];
 </script>
@@ -189,9 +194,8 @@ $.ajax({
             //Set filter info
             switch(d.event_type) {
               case "Facebook Event": d.filters.push('facebook-event'); break;
-              case "Other Event": d.filters.push('other-event'); break;
+              case "Event": d.filters.push('event'); break;
               case "Group Meeting": d.filters.push('group-meeting'); break;
-              case "Indivisible Action": d.filters.push("indivisible-action"); break;
               case "Group": d.filters.push("group"); break;
               default: d.filters.push('other'); break;
             }

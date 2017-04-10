@@ -586,10 +586,10 @@ article#events {
                 background-color: $red;
               }
               
-              &[for=indivisible-action] {
+              &[for=group] {
                 .circle-button {
                   &.default-on {
-                    background-color: #a00003;
+                    background-color: darken(lightgray, 20%);
                   }
                 }
               }
@@ -597,15 +597,15 @@ article#events {
               &[for=group-meeting] {
                 .circle-button {
                   &.default-on {
-                    background-color: $red;
+                    background-color: black;
                   }
                 }
               }
 
-              &[for=other-event] {
+              &[for=event] {
                 .circle-button {
                   &.default-on {
-                    background-color: $pink;
+                    background-color: $red;
                   }
                 }
               }

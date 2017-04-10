@@ -54,7 +54,7 @@ Route::post('import/events-etl', function(Request $request) {
 			"lat" => $event->lat,
 			"lng" => $event->lng,
 			"supergroup" => "Indivisible",
-			"event_type" => "Other Event"
+			"event_type" => $event->{'event_type'} == 'Indivisible Action' ? 'Event' : $event->{'event_type'}
 		];
 		$model->save();
 	}
@@ -79,7 +79,7 @@ Route::get('events', function() {
 	    				'lat' => isset($event['event']['location']['location']['coordinates'][1]) ? $event['event']['location']['location']['coordinates'][1] : "",
 	    				'lng' => isset($event['event']['location']['location']['coordinates'][0]) ? $event['event']['location']['location']['coordinates'][0] : "",
 	    				"supergroup" => "Indivisible",
-	    				'event_type' => "Facebook Event"
+	    				'event_type' => "Event"
 	    			]);
 	    		}
 	    	}
