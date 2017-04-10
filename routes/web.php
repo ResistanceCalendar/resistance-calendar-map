@@ -44,18 +44,11 @@ Route::post('import/events-etl', function(Request $request) {
 
 	foreach($events as $event) {
 		$model = new App\CalendarEvent;
-		$model->event = [
+		$extraData = [
 			'formatType' => 'events-etl',
-			'title' => $event->title,
-			"start_datetime" => $event->{'start_datetime'},
-			"url" => $event->url,
-			"venue" => $event->venue,
-			"group" => $event->group,
-			"lat" => $event->lat,
-			"lng" => $event->lng,
-			"supergroup" => "Indivisible",
 			"event_type" => $event->{'event_type'} == 'Indivisible Action' ? 'Event' : $event->{'event_type'}
 		];
+		$model->event = (object) array_merge((array) $event, (array) $extraData);
 		$model->save();
 	}
 

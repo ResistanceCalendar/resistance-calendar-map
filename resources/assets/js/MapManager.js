@@ -71,10 +71,10 @@ var Event = (function($) { return function(properties) {
         
         // console.log(that.props.event_type)
         if (that.props.social) {
-          if (that.props.social.facebook !== '') { social_html += `<a href='${that.props.social.facebook}' target='_blank'><img src='/img/icon/facebook.png' /></a>`; }
-          if (that.props.social.twitter !== '') { social_html += `<a href='${that.props.social.twitter}' target='_blank'><img src='/img/icon/twitter.png' /></a>`; }
-          if (that.props.social.email !== '') { social_html += `<a href='mailto:${that.props.social.email}' ><img src='/img/icon/mailchimp.png' /></a>`; }
-          if (that.props.social.phone !== '') { social_html += `&nbsp;<img src='/img/icon/phone.png' /><span>${that.props.social.phone}</span>`; }  
+          if (that.props.social.facebook !== '') { social_html += `<a href='${that.props.social.facebook}' target='_blank'><img src='/images/icon/facebook.png' /></a>`; }
+          if (that.props.social.twitter !== '') { social_html += `<a href='${that.props.social.twitter}' target='_blank'><img src='/images/icon/twitter.png' /></a>`; }
+          if (that.props.social.email !== '') { social_html += `<a href='mailto:${that.props.social.email}' ><img src='/images/icon/mailchimp.png' /></a>`; }
+          if (that.props.social.phone !== '') { social_html += `&nbsp;<img src='/images/icon/phone.png' /><span>${that.props.social.phone}</span>`; }  
         }
         
         var new_window = true;
@@ -161,7 +161,7 @@ var MapManager = (function($, d3, leaflet) {
             });
             
       var CAMPAIGN_OFFICE_ICON = L.icon({
-          iconUrl: '//d2bq2yf31lju3q.cloudfront.net/img/icon/star.png',
+          iconUrl: '/images/icon/star.png',
           iconSize:     [17, 14], // size of the icon
           // shadowSize:   [50, 64], // size of the shadow
           // iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
@@ -169,7 +169,7 @@ var MapManager = (function($, d3, leaflet) {
           // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
       });
       var GOTV_CENTER_ICON = L.icon({
-          iconUrl: '//d2bq2yf31lju3q.cloudfront.net/img/icon/gotv-star.png',
+          iconUrl: '/images/icon/gotv-star.png',
           iconSize:     [13, 10], // size of the icon
       });
       var defaultCoord = options&&options.defaultCoord ? options.defaultCoord : {center: [37.8, -96.9], zoom: 4};
