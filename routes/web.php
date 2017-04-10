@@ -78,7 +78,9 @@ Route::get('events', function() {
 	    		}
 	    	}
 	    	else if($event['event']['formatType'] == 'events-etl') {
-	    		array_push($events, $event['event']);
+	    		array_push($events,
+	    			(object) array_merge((array) $event['event'], (array) ['attending' => 0])
+	    		);
 	    	}
 	    }
 	    return $events;

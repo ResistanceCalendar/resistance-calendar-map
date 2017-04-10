@@ -349,6 +349,9 @@ var MapManager = (function($, d3, leaflet) {
         case 'distance':
           filteredEvents = filteredEvents.sort(function(a,b) { return a.distance - b.distance; });
           break;
+        case 'attendance':
+          filteredEvents = filteredEvents.sort(function(a,b) { return b.props.attending - a.props.attending; });
+          break;
         default:
           filteredEvents = filteredEvents.sort(function(a,b) { return a.props.start_time - b.props.start_time; });
           break;

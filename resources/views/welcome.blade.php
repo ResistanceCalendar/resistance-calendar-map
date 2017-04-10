@@ -64,6 +64,7 @@
               <select name='sort'>
                 <option value='time' selected='selected'>Time</option>
                 <option value='distance'>Distance</option>
+                <option value='attendance'>Attendance</option>
               </select>
               <input type='button' style='position: absolute; z-index: -1; opacity: 0;' id='hidden-button'/>
             </td>
