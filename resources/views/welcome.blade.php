@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
 <link rel="stylesheet" type="text/css" href="/css/events-map.css">
-<link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Montserrat:100,200,400,700|Petit+Formal+Script:400' />
+<link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Roboto:100,200,400,500,600,700,800' />
 <title>Resistance Calendar</title>
 
 <!--[if lte IE 9]>
