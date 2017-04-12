@@ -41,7 +41,7 @@
       </h3>
       <h4 class='lato title'>
         <span id='screen-title'>Filters</span>
-        <span id='mobile-title'>Resistance Calendar</span>
+        <span id='mobile-title'><img src="/images/logo.png" alt="" style="width: 50%"></span>
       </h4>
       <form id='filter-form'>
         <table>
