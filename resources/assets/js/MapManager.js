@@ -290,7 +290,8 @@ var MapManager = (function($, d3, leaflet) {
             L.marker(item.latLng, {icon: new L.Icon({
               iconUrl: '/images/pin.png',
               iconRetinaUrl: '/images/pin-2x.png',
-              iconSize: [25, 41]
+              iconSize: [25, 41],
+              className: item.className
             })})
               .on('click', function(e) { _popupEvents(e); })
               .addTo(overlays);
@@ -418,10 +419,12 @@ var MapManager = (function($, d3, leaflet) {
       if (toHide && toHide.length > 0) {
         toHide = toHide.splice(0,toHide.length);
         $(".leaflet-overlay-pane").find("." + toHide.join(",.")).hide();
+        $(".leaflet-marker-pane").find("." + toHide.join(",.")).hide();
       }
 
       if (type && type.length > 0) {
         $(".leaflet-overlay-pane").find("." + type.join(",.")).show();
+        $(".leaflet-marker-pane").find("." + type.join(",.")).show();
         // _refreshMap();
       }
 
