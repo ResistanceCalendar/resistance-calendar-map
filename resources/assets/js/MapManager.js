@@ -113,7 +113,7 @@ var Event = (function($) { return function(properties) {
         var lat = that.props.lat
         var lon = that.props.lng
 
-        var attendingText = typeof that.props.attending !== 'undefined' ? "- " + that.props.attending + " RSVPs" : ""
+        var attendingText = typeof that.props.attending == 'undefined' && that.props.attending > 0 ? "- " + that.props.attending + " RSVPs" : ""
         
         var rendered = $("<div class=montserrat/>")
           .addClass('event-item ' + that.className)
