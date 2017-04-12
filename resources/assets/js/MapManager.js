@@ -46,6 +46,7 @@ var Event = (function($) { return function(properties) {
       };
 
       this.props.attending = properties.attending
+      this.attending = properties.attending
 
       
       
@@ -204,7 +205,7 @@ var MapManager = (function($, d3, leaflet) {
                  target.lng == d.props.LatLng[1] &&
                  (!current_filters || current_filters.length == 0
                     || $(d.properties.filters).not(current_filters).length != d.properties.filters.length);
-        }).sort(function(a, b) { return a.props.start_time - b.props.start_time; });
+        }).sort(function(a, b) { return b.props.attending - a.props.attending; });
 
         var div = $("<div />")
           .append(filtered.length > 1 ? "<h3 class='sched-count'>" + filtered.length + " Results</h3>" : "")
@@ -247,10 +248,10 @@ var MapManager = (function($, d3, leaflet) {
     var initialize = function() {
       var uniqueLocs = eventsList.reduce(function(arr, item){
         var className = item.properties.filters.join(" ");
-        if ( arr.indexOf(item.properties.lat + "||" + item.properties.lng + "||" + className) >= 0 ) {
+        if ( arr.indexOf(item.properties.lat + "||" + item.properties.lng + "||" + className + '||' + item.props.attending) >= 0 ) {
           return arr;
         } else {
-          arr.push(item.properties.lat  + "||" +  item.properties.lng + "||" + className);
+          arr.push(item.properties.lat  + "||" +  item.properties.lng + "||" + className + '||' + item.props.attending);
           return arr;
         }
       }, []);
@@ -261,7 +262,7 @@ var MapManager = (function($, d3, leaflet) {
       uniqueLocs = uniqueLocs.map(function(d) {
         var split = d.split("||");
         return { latLng: [ parseFloat(split[0]), parseFloat(split[1])],
-                 className: split[2] };
+                 className: split[2], attending: split[3] };
       });
 
 
@@ -284,7 +285,16 @@ var MapManager = (function($, d3, leaflet) {
           //     .on('click', function(e) { _popupEvents(e); })
           //     .addTo(overlays);
           // }
-          if (item.className == 'event') {
+
+          if(item.attending > 2000 && item.className == 'event' ) {
+            L.marker(item.latLng, {icon: new L.Icon({
+              iconUrl: '/images/pin.png',
+              iconRetinaUrl: '/images/pin-2x.png',
+              iconSize: [25, 41]
+            })})
+              .on('click', function(e) { _popupEvents(e); })
+              .addTo(overlays);
+          } else if (item.className == 'event') {
             L.circleMarker(item.latLng, { radius: 5, className: item.className, color: 'white', fillColor: '#ec3659', opacity: 0.8, fillOpacity: 0.7, weight: 2 })
               .on('click', function(e) { _popupEvents(e); })
               .addTo(overlays);
