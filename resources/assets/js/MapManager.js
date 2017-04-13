@@ -125,7 +125,6 @@ var Event = (function($) { return function(properties) {
                 <div class="dateblock">
                   <span class="left" style="text-transform: uppercase">${weekDay}</span>
                   <span class="right">${monthDate}</span>
-                  <span class="time">${time}</span>
                 </div>
               </h5>
               <h3>
