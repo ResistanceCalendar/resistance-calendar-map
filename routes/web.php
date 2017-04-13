@@ -15,49 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('import/OSDI', function(Request $request) {
-	if(request()->input('truncate') === true) {
-		DB::table('calendar_events')->truncate();
-	}
+Route::post('import/OSDI', 'ImportController@importOSDI');
 
-	$response = json_decode(file_get_contents(request()->input('url')));
-	$events = $response->{'_embedded'}->{'osdi:events'};
-
-	foreach($events as $event) {
-		$model = new App\CalendarEvent;
-		$model->event = $event;
-		$model->save();
-	}
-
-	Artisan::call('cache:clear');
-
-	return "Events imported";
-});
-
-Route::post('import/events-etl', function(Request $request) {
-	if(request()->input('truncate') === true) {
-		DB::table('calendar_events')->truncate();
-	}
-
-	$response = (file_get_contents(request()->input('url')));
-	$events = json_decode(str_replace('window.INDIVISIBLE_EVENTS=', '', $response));
-
-	foreach($events as $event) {
-		if($event->{'start_datetime'} == "" || new DateTime($event->{'start_datetime'}) > new DateTime()) {
-			$model = new App\CalendarEvent;
-			$extraData = [
-				'formatType' => 'events-etl',
-				'event_type' => $event->{'event_type'} == 'Indivisible Action' ? 'Event' : $event->{'event_type'}
-			];
-			$model->event = (object) array_merge((array) $event, (array) $extraData);
-			$model->save();
-		}
-	}
-
-	Artisan::call('cache:clear');
-
-	return "imported";
-});
+Route::post('import/events-etl', 'ImportController@importEventsEtl');
 
 Route::get('events', function() {
 	return response()->json(Cache::remember('events', 60, function () {
