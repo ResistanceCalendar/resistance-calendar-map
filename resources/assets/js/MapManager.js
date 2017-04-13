@@ -356,9 +356,7 @@ var MapManager = (function($, d3, leaflet) {
         return false;
       });
 
-      return filtered.filter(function(d) {
-        return d.props.title.toLowerCase().includes(document.getElementById('search').value.toLowerCase())
-      });
+      return filtered;
     };
 
     var filterEvents = function (zipcode, distance, filterTypes) {
