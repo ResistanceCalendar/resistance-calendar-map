@@ -109,7 +109,9 @@ var Event = (function($) { return function(properties) {
       this.render_event = function(distance, zipcode) {
         var that = this;
 
-        var datetime = moment(that.props.start_time).format("MMM DD (ddd) h:mma");
+        var weekDay = moment(that.props.start_time).format("ddd");
+        var monthDate = moment(that.props.start_time).format("MMM DD");
+        var time = moment(that.props.start_time).format("h:mma");
         var lat = that.props.lat
         var lon = that.props.lng
 
@@ -120,16 +122,21 @@ var Event = (function($) { return function(properties) {
           .html(`
             <div class="event-item lato ${that.className}" lat="${lat}" lon="${lon}">
               <h5 class="time-info">
-                <span class="time-info-dist">${distance ?  distance + "mi&nbsp;&nbsp;" : ""}</span>${datetime}
+                <div class="dateblock">
+                  <span class="left" style="text-transform: uppercase">${weekDay}</span>
+                  <span class="right">${monthDate}</span>
+                  <span class="time">${time}</span>
+                </div>
               </h5>
               <h3>
-                <a target="_blank" href="${that.props.url}">${that.props.title}</a>
+                <a target="_blank" href="${that.props.url}" class="event-title">${that.props.title}</a>
               </h3>
               <span class="label-icon"></span>
               <h5 class="event-type">${that.props.event_type} ${attendingText}</h5>
               <p>${that.props.address}</p>
               <div>
                 <a class="rsvp-link" href="${that.props.url}" target="_blank">DETAILS</a>
+                <span class="time-info-dist" style="float: right; padding-top: 10px">${distance ?  distance + "mi&nbsp;&nbsp;" : ""}</span>
               </div>
             </div>
             `);
