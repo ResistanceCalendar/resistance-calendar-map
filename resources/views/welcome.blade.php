@@ -44,8 +44,8 @@
         <span id='mobile-title'><img src="/images/logo.png" alt="" style="width: 50%"></span>
       </h4>
       <form id='filter-form'>
-        <h5 class=montserrat>Search for an event</h5>
-        <input type="text" style="width: 100%; margin-bottom: 5px; text-align: left; text-indent: 10px" name="search" placeholder="SEARCH" id="search">
+        <!-- <h5 class=montserrat>Search for an event</h5>
+        <input type="text" style="width: 100%; margin-bottom: 5px; text-align: left; text-indent: 10px" name="search" placeholder="SEARCH" id="search"> -->
         <table>
           <tr>
             <td>
