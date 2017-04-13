@@ -43,13 +43,15 @@ Route::post('import/events-etl', function(Request $request) {
 	$events = json_decode(str_replace('window.INDIVISIBLE_EVENTS=', '', $response));
 
 	foreach($events as $event) {
-		$model = new App\CalendarEvent;
-		$extraData = [
-			'formatType' => 'events-etl',
-			'event_type' => $event->{'event_type'} == 'Indivisible Action' ? 'Event' : $event->{'event_type'}
-		];
-		$model->event = (object) array_merge((array) $event, (array) $extraData);
-		$model->save();
+		if($event->{'start_datetime'} == "" || new DateTime($event->{'start_datetime'}) > new DateTime()) {
+			$model = new App\CalendarEvent;
+			$extraData = [
+				'formatType' => 'events-etl',
+				'event_type' => $event->{'event_type'} == 'Indivisible Action' ? 'Event' : $event->{'event_type'}
+			];
+			$model->event = (object) array_merge((array) $event, (array) $extraData);
+			$model->save();
+		}
 	}
 
 	Artisan::call('cache:clear');
