@@ -337,6 +337,7 @@ var MapManager = (function($, d3, leaflet) {
 
       var filtered = eventsList.filter(function(d) {
         var dist = toMile(zipLatLng.distanceTo(d.props.LatLng));
+
         if (dist < distance) {
           
           d.distance = Math.round(dist*10)/10;
@@ -355,7 +356,9 @@ var MapManager = (function($, d3, leaflet) {
         return false;
       });
 
-      return filtered;
+      return filtered.filter(function(d) {
+        return d.props.title.toLowerCase().includes(document.getElementById('search').value.toLowerCase())
+      });
     };
 
     var filterEvents = function (zipcode, distance, filterTypes) {
