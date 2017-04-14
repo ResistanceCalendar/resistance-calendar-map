@@ -326,6 +326,7 @@ $("#filter-list").append(
     } else {
       window.mapManager.filterByType(params.f);
       window.mapManager.filter(params.zipcode, params.distance, params.sort, params.f);
+      ga('send', 'event', 'Filter', 'zipcode', params.zipcode);
     }
     $("#loading-icon").hide();
 

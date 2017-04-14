@@ -134,7 +134,7 @@ var Event = (function($) { return function(properties) {
               <h5 class="event-type">${that.props.event_type} ${attendingText}</h5>
               <p>${that.props.address}</p>
               <div>
-                <a class="rsvp-link" href="${that.props.url}" target="_blank">DETAILS</a>
+                <a class="rsvp-link" href="${that.props.url}" target="_blank" onclick="ga('send', 'event', 'Event', 'visited', '${that.props.url}');">DETAILS</a>
                 <span class="time-info-dist" style="float: right; padding-top: 10px">${distance ?  distance + "mi&nbsp;&nbsp;" : ""}</span>
               </div>
             </div>
@@ -365,12 +365,15 @@ var MapManager = (function($, d3, leaflet) {
     var sortEvents = function(filteredEvents, sortType) {
       switch (sortType) {
         case 'distance':
+          ga('send', 'event', 'Sort', 'type', 'distance');
           filteredEvents = filteredEvents.sort(function(a,b) { return a.distance - b.distance; });
           break;
         case 'attendance':
+          ga('send', 'event', 'Sort', 'type', 'attendance');
           filteredEvents = filteredEvents.sort(function(a,b) { return b.props.attending - a.props.attending; });
           break;
         default:
+          ga('send', 'event', 'Sort', 'type', 'time');
           filteredEvents = filteredEvents.sort(function(a,b) { return a.props.start_time - b.props.start_time; });
           break;
       }
@@ -560,6 +563,8 @@ var MapManager = (function($, d3, leaflet) {
         current_distance = distance;
         centralMap.setView([parseFloat(targetZipcode.lat), parseFloat(targetZipcode.lon)], zoom);
       }
+
+      ga('send', 'event', 'Range', 'distance', parseInt(distance));
 
       var filtered = filterEvents(targetZipcode, parseInt(distance), filterTypes);
 
