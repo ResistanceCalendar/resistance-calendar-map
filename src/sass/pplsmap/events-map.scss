@@ -51,7 +51,7 @@
   h5.official-tag {
     font-size: 9px;
     text-transform: uppercase;
-    color: #F55B5B;
+    color: $red;
     font-weight: 400;
     border-radius: 2px;
     border: 1px solid;
@@ -306,7 +306,7 @@ nav#mobile-nav {
    a {
      width: 90%;
      color: white;
-     background-color: #ff3838;
+     background-color: $pink;
      box-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
      display: inline-block;
      padding: 7px 8px;
@@ -322,7 +322,7 @@ nav#mobile-nav {
 section#header {
   width: 100%;
   height: 70px;
-  background-color: #ec3659;
+  background-color: $pink;
 
   nav {
     position: absolute;
@@ -332,7 +332,7 @@ section#header {
     li {
       a.contribute {
         color: white;
-        background-color: #ff3838;
+        background-color: $pink;
         box-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
         display: inline-block;
         padding: 7px 8px;
