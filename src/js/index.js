@@ -13,6 +13,7 @@ var date = new Date();
 $("#loading-icon").show();
 Api.get.events().then((data) => {
   window.EVENT_DATA = data;
+  console.log(data);
   d3.csv('//d1y0otadi3knf6.cloudfront.net/d/us_postal_codes.gz',
    function(zipcodes) {
      $("#loading-icon").hide();

@@ -65,13 +65,24 @@ const validate = {
 const get = {
   events: params =>
     new Promise((resolve, reject) => {
-      // request
-      //   .get(`${base}/events`)
-      //   .query(params)
-      //   .end(resolver(resolve, reject));
-      // FIXME: there seems to be at least one property missing from events, see `Event` in `MapBuilder.js`
-      resolve([])
-    }),
+      request
+        .get(`${base}/events`)
+        .query(params)
+        .end(resolver(resolve, reject));
+    })
+    .then(data => data.map(d => ({
+      event_type: 'Event',
+      start_datetime: d.startTime,
+      venue: d.venue.name,
+      lat: parseFloat(d.venue.address.lat),
+      lng: parseFloat(d.venue.address.lng),
+      supergroup: 'Brand New Congress',
+      attending: 0,
+      formatType: 'events-etl',
+      group: null,
+      title: d.title,
+      url: d.url
+    }))),
 
   candidates: () =>
     new Promise((resolve, reject) => {

@@ -228,8 +228,8 @@ function MapManager(eventData, campaignOffices, zipcodes, options) {
               filtered.map(function(d) {
                 return $("<li class=montserrat/>")
                           .attr('data-attending', (function(prop) {
-                              var email = Cookies.get('map.bernie.email');
-                              var events_attended_raw = Cookies.get('map.bernie.eventsJoined.' + email);
+                              var email = Cookies.get('map.bnc.email');
+                              var events_attended_raw = Cookies.get('map.bnc.eventsJoined.' + email);
                               var events_attended = events_attended_raw ? JSON.parse(events_attended_raw) : [];
                               return $.inArray(prop.id_obfuscated, events_attended) > -1;
 
@@ -244,12 +244,13 @@ function MapManager(eventData, campaignOffices, zipcodes, options) {
 
 
       setTimeout(
-        function() { L.popup()
+        function() {
+          L.popup()
           .setLatLng(event.target._latlng)
           .setContent(div.html())
           .openOn(centralMap);
         }
-      , 100);
+      , 10);
     };
 
 
