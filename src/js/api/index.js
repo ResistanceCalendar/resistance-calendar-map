@@ -70,7 +70,7 @@ const get = {
         .query(params)
         .end(resolver(resolve, reject));
     })
-    .then(data => data.map(d => ({
+    .then(data => data.filter(d => d.venue.address !== null).map(d => ({
       event_type: 'Event',
       start_datetime: d.startTime,
       venue: d.venue.name,
