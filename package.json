@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server --watch"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
