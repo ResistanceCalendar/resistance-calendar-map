@@ -1,6 +1,7 @@
 @import 'partial/reset';
 @import 'partial/variables';
 @import 'partial/mixins';
+@import 'partial/fonts';
 
 ::-webkit-scrollbar {
     -webkit-appearance: none;
@@ -12,8 +13,8 @@
     -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
 
-* {
-  font-family: Roboto !important;
+body {
+  font-family: Roboto;
 }
 
 
@@ -389,18 +390,33 @@ section#header {
   div#spiel {
     padding-top: 10px;
     margin-left: 10px;
-    font-weight: 300;
-    display: inline-block;
+    font-weight: 500;
+    display: flex;
     color: rgba(255,255,255,.52);
-    // float: left;
+    align-items: center;
+    font-size: 18px;    
 
-    strong {
-      font-size: 36px;
-      padding: 4px;
-      display: inline-block;
+    > .brand-title {
+      font-family: 'Roboto Slab', serif;
       color: white;
-      font-weight: bold
+      padding: 0 10px 0 15px;
+    }
+    > .app-title {
+      font-weight: 300;
+      margin: 2px 15px 0;
+      color: white;
+      font-family: 'US-101';
+      font-size: 22px;
+      padding: 10px 15px 8px;
+      background: rgba(0, 0, 0, 0.15);
 
+      > .fa-map-marker {
+        padding-right: 10px;
+        font-size: 20px;
+      }
+    }
+    > img {
+      max-height: 50px;
     }
   }
   a#header-logo {
