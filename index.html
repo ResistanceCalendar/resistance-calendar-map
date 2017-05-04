@@ -40,7 +40,11 @@
           </h3>
           <h4 class="lato title">
             <span id="screen-title">Filters</span>
-            <span id="mobile-title"><img src="/images/logo.png" alt="" style="width: 50%"></span>
+            <div id="mobile-title">
+              <img src="/images/logo.png" alt="">
+              <span class="brand-title">Brand New Congress</span>
+              <span class="app-title"><i class="fa fa-map-marker"></i>Event Map</span>
+            </div>
           </h4>
 
           <form id="filter-form">
@@ -48,7 +52,7 @@
               <tr>
                 <td>
                   <h5 class=montserrat>By Zipcode</h5>
-                  <input type="number" name="zipcode" maxlength="5" placeholder="ZIPCODE" onclick="this.select();" >
+                  <input type="number" name="zipcode" maxlength="5" placeholder="XXXXX" onclick="this.select();" >
                 </td>
                 <td>
                   <h5 class=montserrat>Distance</h5>
@@ -61,7 +65,7 @@
                 </td>
                 <td>
                   <h5 class=montserrat>Sort By</h5>
-                  <select name="sort">
+                  <select class="sort" name="sort">
                     <option value="time" selected="selected">Time</option>
                     <option value="distance">Distance</option>
                     <option value="attendance">Attendance</option>
@@ -114,7 +118,7 @@
           </ul>
           <footer>
             <div id="footer-area" >
-              <sub>&copy; Resistance Calendar</sub>
+              <sub>&copy; 2017 Brand New Congress</sub>
             </div>
           </footer>
         </div>

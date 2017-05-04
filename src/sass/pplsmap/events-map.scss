@@ -394,7 +394,7 @@ section#header {
     display: flex;
     color: rgba(255,255,255,.52);
     align-items: center;
-    font-size: 18px;    
+    font-size: 20px;    
 
     > .brand-title {
       font-family: 'Roboto Slab', serif;
@@ -412,7 +412,6 @@ section#header {
 
       > .fa-map-marker {
         padding-right: 10px;
-        font-size: 20px;
       }
     }
     > img {
@@ -706,8 +705,10 @@ article#events {
   // }
 
   h4.title {
-    #screen-title { display: block; }
-    #mobile-title { display: none; }
+    #screen-title { display: block; font-size: 12px; }
+    #mobile-title {
+      display: none;
+    }
   }
 
   div#event-list-container {
@@ -818,15 +819,9 @@ article#events {
   div#filters {
     min-height: 90px;
     background-color: #EBEBEB;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-    margin-top: -15px;
-    border-radius: 10px 0px 0 0;
     margin-left: -2px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 5px;
+    padding: 10px 15px;
     position: relative;
-    border-top: 1px #CCCCCC solid;
 
     div#loading-icon {
       display: none;
@@ -847,23 +842,32 @@ article#events {
     h4 {
       font-size: 15px;
       color: #333333;
-      padding: 4px 0;
+      padding: 5px 0;
       margin-bottom: 10px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 2px;
-      border-bottom: 1px dotted rgba(255,255,255,0.7);
     }
     h5 {
-      // font-family: Montserrat, sans-serif;
       color: #333333;
       font-size: 13px;
       font-weight: 400;
-      text-transform: uppercase;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
     }
 
     form {
+      select:not([multiple]) {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-position: right 50%;
+        background-repeat: no-repeat;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAMCAYAAABSgIzaAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDZFNDEwNjlGNzFEMTFFMkJEQ0VDRTM1N0RCMzMyMkIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDZFNDEwNkFGNzFEMTFFMkJEQ0VDRTM1N0RCMzMyMkIiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0NkU0MTA2N0Y3MUQxMUUyQkRDRUNFMzU3REIzMzIyQiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0NkU0MTA2OEY3MUQxMUUyQkRDRUNFMzU3REIzMzIyQiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuGsgwQAAAA5SURBVHjaYvz//z8DOYCJgUxAf42MQIzTk0D/M+KzkRGPoQSdykiKJrBGpOhgJFYTWNEIiEeAAAMAzNENEOH+do8AAAAASUVORK5CYII=);
+        padding: .5em;
+        padding-right: 1.5em
+      }
+      select.sort {
+        max-width: 120px;
+      }
       input[type='text'], input[type='number'] {
         margin-right: 15px;
         padding: 5px 0;
@@ -873,7 +877,8 @@ article#events {
         text-align: center;
         font-size: 16px;
         width: 130px;
-        border-radius: 2px;
+        border-radius: 0;
+        height: 31px;
       }
       input[name='zipcode']::-webkit-outer-spin-button,
       input[name='zipcode']::-webkit-inner-spin-button {
@@ -882,13 +887,17 @@ article#events {
         margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
       }
       select { color: #333333;
-        /*background-color: $darkdarkblue;*/
         background-color: white;
         font-size: 18px;
         border-radius: 0;
         border: 1px solid rgba(255,255,255,0.7);
         &[name='distance'] {
           margin-right: 15px;
+        }
+      }
+      #filter-popup-area {
+        > a {
+          border-radius: 0;
         }
       }
 
@@ -1309,11 +1318,54 @@ footer {
         & > article {
           width: 100% !important;
           float: none;
+          
+          table {
+            width: 100%;
+          }
 
           &#events {
+            div#filters form select.sort {
+              width: 100%;
+              max-width: none;
+            }
+            #filter-popup-area > a {
+              border: 1px solid white;
+              background: transparent;
+              color: white;
+              &:hover {
+                background-color: white;
+                color: $pink;
+                cursor: pointer;
+              }
+            }
             h4.title {
               #screen-title { display: none; }
-              #mobile-title { display: block; letter-spacing: 1px;}
+              #mobile-title {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                > img {
+                  max-width: 200px;
+                  margin-bottom: 20px;
+                }
+                > .brand-title {
+                  font-family: 'Roboto Slab', serif;
+                  color: white;
+                  padding: 0 10px 0 15px;
+                }
+                > .app-title {
+                  font-weight: 300;
+                  margin: 10px 0 0;
+                  color: white;
+                  font-family: 'US-101';
+                  font-size: 22px;
+                  padding: 10px 15px 8px;
+                  background: rgba(0, 0, 0, 0.15);
+                  > .fa-map-marker {
+                    padding-right: 10px;
+                  }
+                }
+              }
             }
              border: none;
              #filters {
@@ -1325,9 +1377,6 @@ footer {
                 padding: 3px 0;
                 font-size: 16px;
                 width: 80px;
-              }
-              select {
-                font-size: 14px;
               }
 
               h3#switch-link {
@@ -1398,8 +1447,6 @@ footer {
       border-bottom: none;
       font-weight: 300;
       color: white;
-      border-bottom: 1px dotted rgba(255,255,255, 0.3);
-      display: inline-block;
     }
 
 }
