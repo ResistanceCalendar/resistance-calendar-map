@@ -4,10 +4,9 @@
 - `yarn run dev`
 - `open http://localhost:8080`
 
-## TODO
+## Production
 
-- [x] Dev setup
-- [ ] Remove remaining unneeded code
-- [ ] Production build
-  - Extract text plugin for scss
-- [ ] Deploy to surge
+- `yarn install`
+- `yarn run build`
+- `pushstate-server --port 8080 ./build`
+- `open http://localhost:8080`

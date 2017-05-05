@@ -2,11 +2,14 @@ const path = require('path')
 const debug = process.env.NODE_ENV !== 'production'
 const webpack = require('webpack')
 const HtmlPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   context: __dirname,
-  devtool: debug ? 'inline-sourcemap' : null,
-  entry: './src/js/index.js',
+  devtool: debug ? 'inline-sourcemap' : false,
+  entry: {
+    index: './src/js/index.js'
+  },
   module: {
     rules: [
       {
@@ -23,23 +26,27 @@ module.exports = {
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        use: [{
-          loader: "style-loader"
+        use: debug ? [{
+          loader: 'style-loader'
         }, {
-          loader: "css-loader", options: {
+          loader: 'css-loader', options: {
               sourceMap: true
           }
         }, {
-          loader: "sass-loader", options: {
+          loader: 'sass-loader', options: {
               sourceMap: true
           }
-        }]
+        }] :
+        ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader!sass-loader'
+        }),
       }
     ]
   },
   output: {
-    path: path.join(__dirname, 'build/js'),
-    filename: 'index.js'
+    path: path.join(__dirname, 'build'),
+    filename: '[name].js'
   },
   plugins: debug ?
     [
@@ -50,8 +57,12 @@ module.exports = {
       })
     ] :
     [
-      new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.OccurenceOrderPlugin(),
+      new ExtractTextPlugin('styles.css'),
       new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
+      new HtmlPlugin({
+        filename: 'index.html',
+        template: './index.html',
+        inject: true
+      })
     ],
 };
