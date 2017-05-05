@@ -3,16 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="description" content="Organize. Resist. Repeat">
-    <link href="https://daks2k3a4ib2z.cloudfront.net/5890e0241852b1404af8762d/58cdd2a2f552f26c3893f4bf_RC-32.png" rel="shortcut icon" type="image/x-icon">
+    <meta name="description" content="It's time to elect a brand new congress. Find events near you!">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
     <meta property="og:image" content="https://global-uploads.webflow.com/5890e0241852b1404af8762d/58cdccb6df096f59381703bf_Screenshot%202017-03-18%2013.50.36-p-500x500.png" />
     <meta property="og:url" content="https://resistancecalendar.org/" />
-    <meta property="og:title" content="Resistance Calendar"/>
-    <meta property="og:description" content="Organize. Resist. Repeat"/>
+    <meta property="og:title" content="Brand New Congress | Events"/>
+    <meta property="og:description" content="It's time to elect a brand new congress. Find events near you!"/>
     <link href="//api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:100,200,400,500,600,700,800" />
-    <title>Resistance Calendar</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    <title>Brand New Congress | Events</title>
   </head>
   <body class="list-view initial-view">
     <section id="header">
@@ -20,7 +21,9 @@
         <div class="main-title-area">
           <div style="margin-bottom: 4px;">
             <div id="spiel">
-              <img src="/images/logo.png" alt="" style="width: 50%">
+              <img src="/images/logo.png" alt="">
+              <span class="brand-title">Brand New Congress</span>
+              <span class="app-title"><i class="fa fa-map-marker"></i>Event Map</span>
             </div>
           </div>
         </div>
@@ -37,7 +40,11 @@
           </h3>
           <h4 class="lato title">
             <span id="screen-title">Filters</span>
-            <span id="mobile-title"><img src="/images/logo.png" alt="" style="width: 50%"></span>
+            <div id="mobile-title">
+              <img src="/images/logo.png" alt="">
+              <span class="brand-title">Brand New Congress</span>
+              <span class="app-title"><i class="fa fa-map-marker"></i>Event Map</span>
+            </div>
           </h4>
 
           <form id="filter-form">
@@ -45,7 +52,7 @@
               <tr>
                 <td>
                   <h5 class=montserrat>By Zipcode</h5>
-                  <input type="number" name="zipcode" maxlength="5" placeholder="ZIPCODE" onclick="this.select();" >
+                  <input type="number" name="zipcode" maxlength="5" placeholder="XXXXX" onclick="this.select();" >
                 </td>
                 <td>
                   <h5 class=montserrat>Distance</h5>
@@ -58,7 +65,7 @@
                 </td>
                 <td>
                   <h5 class=montserrat>Sort By</h5>
-                  <select name="sort">
+                  <select class="sort" name="sort">
                     <option value="time" selected="selected">Time</option>
                     <option value="distance">Distance</option>
                     <option value="attendance">Attendance</option>
@@ -111,7 +118,7 @@
           </ul>
           <footer>
             <div id="footer-area" >
-              <sub>&copy; Resistance Calendar</sub>
+              <sub>&copy; 2017 Brand New Congress</sub>
             </div>
           </footer>
         </div>
