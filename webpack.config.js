@@ -3,6 +3,7 @@ const debug = process.env.NODE_ENV !== 'production'
 const webpack = require('webpack')
 const HtmlPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   context: __dirname,
@@ -63,6 +64,10 @@ module.exports = {
         filename: 'index.html',
         template: './index.html',
         inject: true
-      })
+      }),
+      new CopyPlugin([
+        { from: 'images', to: 'images' },
+        { from: 'fonts', to: 'fonts' }
+      ])
     ],
 };
