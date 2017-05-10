@@ -7,7 +7,20 @@ import * as Cookies from 'js-cookie';
 import Api from './api';
 jQuery.deparam = deparam;
 var $ = jQuery;
+import ReactDOM from 'react-dom'
+import React from 'react'
+import NewEventForm from './NewEventForm'
 window.$ = jQuery;
+
+
+$(() => {
+  const $modalPortal = $('<div id="modalPortal"></div>')
+  $('body').append($modalPortal)
+  const onClose = () => setTimeout(() => ReactDOM.unmountComponentAtNode($modalPortal[0]))
+  $('#newEvent').on('click', () => {
+    ReactDOM.render(<NewEventForm candidate="Test Candidate" onRequestClose={onClose} />, $modalPortal[0])
+  })
+})
 
 var date = new Date();
 $("#loading-icon").show();

@@ -19,8 +19,8 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['es2015'],
-            plugins: ['transform-object-rest-spread']
+            presets: ['babel-preset-es2015', 'babel-preset-react', 'babel-preset-flow'],
+            plugins: ['transform-object-rest-spread', 'transform-class-properties']
           }
         }
       },
