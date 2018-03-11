@@ -2,9 +2,10 @@
 
 Displays events from [resistance-calendar-api](https://github.com/ResistanceCalendar/resistance-calendar-api) on a map.
 
-## Requirements
+## Prerequisites
 
-[PHP Composer](https://getcomposer.org/)
+[PHP Composer](https://getcomposer.org)
+[Node Package Manager](https://npm.org)
 [Node JS](https://nodejs.org)
 
 ## Local Setup 
