@@ -20,7 +20,6 @@ Route::post('import/OSDI', 'ImportController@importOSDI');
 Route::post('import/events-etl', 'ImportController@importEventsEtl');
 
 Route::get('events', function() {
-  Cache::flush();
 	return response()->json(Cache::remember('events', 60, function () {
     $events = [];
     $now = urlencode(date('\'Y-m-d\''));
