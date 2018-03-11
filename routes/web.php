@@ -20,12 +20,12 @@ Route::post('import/OSDI', 'ImportController@importOSDI');
 Route::post('import/events-etl', 'ImportController@importEventsEtl');
 
 Route::get('events', function() {
+  Cache::flush();
 	return response()->json(Cache::remember('events', 60, function () {
     $events = [];
     $now = urlencode(date('\'Y-m-d\''));
     $query = "\$filter=start_date%20gt%20$now";
     $url = "https://resistance-calendar.herokuapp.com/v1/events?page=0&per_page=3000&$query";
-    error_log($url);
     $response = file_get_contents($url);
     if ($response !== false) {
       error_log("response okay");
@@ -36,7 +36,7 @@ Route::get('events', function() {
     			array_push($events, [
     				'start_datetime' => $event['start_date'],
     				'url'            => $eventUrl,
-    				'venue'          => '',
+    				'venue'          => isset($event['location']['venue']) ? $event['location']['venue'] : null,
     				'group'          => null,
     				'title'          => $event['title'],
     				'lat'            => isset($event['location']['location']['latitude']) ? $event['location']['location']['latitude'] : '',
