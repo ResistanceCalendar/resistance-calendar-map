@@ -11,6 +11,7 @@ Displays events from [resistance-calendar-api](https://github.com/ResistanceCale
 ## Local Setup 
 
 ```
+cd resistance-calendar-map
 npm install
 composer install --no-scripts
 cp .env.example .env
