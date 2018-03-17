@@ -27,7 +27,6 @@ var Event = (function($) { return function(properties) {
         twitter: properties.twitter
       };
 
-
       this.render = function (distance, zipcode) {
         var that = this;
 
