@@ -20,8 +20,8 @@ Route::post('import/OSDI', 'ImportController@importOSDI');
 Route::post('import/events-etl', 'ImportController@importEventsEtl');
 
 Route::get('events', function() {
+  Cache::flush('events');
 	return response()->json(Cache::remember('events', 60, function () {
-    $events = [];
     $now = urlencode(date('\'Y-m-d\''));
     $query = "\$filter=start_date%20gt%20$now";
     $url = "https://resistance-calendar.herokuapp.com/v1/events?page=0&per_page=3000&$query";
@@ -29,7 +29,7 @@ Route::get('events', function() {
     if ($response !== false) {
       return json_decode($response, true);
     } else {
-      return [];
+      return null;
     }
 	}));
 });
