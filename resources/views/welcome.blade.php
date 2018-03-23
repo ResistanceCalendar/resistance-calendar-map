@@ -72,7 +72,7 @@
             </td>
           </tr>
         </table>
-        <div id='filter-popup-area' class='montserrat'>
+        <!-- <div id='filter-popup-area' class='montserrat'>
           <a href='javascript: void(null)' class='filter-button show-filter' onclick='$("#events").addClass("show-type-filter");'>
             Search by Type
           </a>
@@ -96,7 +96,7 @@
               </a>
             </p>
           </div>
-        </div>
+        </div> -->
       </form>
     </div>
     <div id='event-list-container'>
@@ -326,10 +326,10 @@ $("#filter-list").append(
     $("#loading-icon").show();
 
     if ( window.mapManager._options && window.mapManager._options.defaultCoord && params.zipcode.length != 5) {
-      window.mapManager.filterByType(params.f);
+      // window.mapManager.filterByType(params.f);
       window.mapManager.filterByCoords(window.mapManager._options.defaultCoord.center, params.distance, params.sort, params.f);
     } else {
-      window.mapManager.filterByType(params.f);
+      // window.mapManager.filterByType(params.f);
       window.mapManager.filter(params.zipcode, params.distance, params.sort, params.f);
       ga('send', 'event', 'Filter', 'zipcode', params.zipcode);
     }
