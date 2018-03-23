@@ -180,10 +180,12 @@ window.eventTypeFilters = [
 </script>
 <script type='text/javascript'>
 (function($, d3) {
-var date = new Date();
+var dateString = moment().format("YYYY-MM-DD");
+var query = 'page=0&per_page=3000&$filter=start_date%20gt%20' + dateString;
+var url = 'https://resistance-calendar.herokuapp.com/v1/events?' + query;
 $("#loading-icon").show();
 $.ajax({
-  url: '/events',
+  url: url,
   dataType: 'json',
   cache: true, // otherwise will get fresh copy every page load
   success:  function(data) {
