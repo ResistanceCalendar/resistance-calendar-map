@@ -1,90 +1,63 @@
 //Create an event node
 var Event = (function($) { return function(properties) {
-  
-      this.properties = properties;
-      
-      // console.log(this.properties);
-      
-      this.blip = null;
-      // // this.title = properties.field_65;      
-      // this.url = properties.field_68_raw.url;
-      // this.address = properties.field_64;
-      // this.listing = null;
       this.className = properties.event_type.replace(/[^\w]/ig,"-").toLowerCase();
-      
-      // if (properties.url) {
-      //   properties.url = properties.facebook ? properties.facebook : (
-      //                         properties.twitter ? properties.twitter : null
-      //                    )
-      //   if (!properties.url) {
-      //     return null;
-      //   }
-      // }
-      
+
       this.props = {}
       this.props.title = properties.title
-      this.props.url = properties.url; //properties.url.match(/^@/g) ? `http://twitter.com/${properties.url}` : properties.url;
-      this.props.start_datetime = properties.start_datetime
-      this.props.address = properties.venue
+      this.props.browser_url = 'https://www.resistancecalendar.org/event/' + properties['_id'];
+      this.props.start_date = properties.start_date
+      this.props.address = properties['location']['venue']
       this.props.supergroup = properties.supergroup
-      this.props.start_time = properties.event_type=='Group' ? new Date(2100,01,01): moment(properties.start_datetime)._d;
-      
-      // Remove the timezone issue from 
+      this.props.start_time = properties.event_type=='Group' ? new Date(2100,01,01): moment(properties.start_date)._d;
+
+      // Remove the timezone issue from
       this.props.start_time = new Date(this.props.start_time.valueOf() + this.props.start_time.getTimezoneOffset() * 60000);
       this.props.group = properties.group
-      this.props.LatLng = [parseFloat(properties.lat), parseFloat(properties.lng)]
       this.props.event_type = properties.event_type
-      this.props.lat = properties.lat
-      this.props.lng = properties.lng
+      this.props.lat = properties.location.location.latitude.toString()
+      this.props.lng = properties.location.location.longitude.toString()
+      this.props.LatLng = [this.props.lat, this.props.lng]
       this.props.filters = properties.filters
-      
-      this.props.social = { 
-        facebook: properties.facebook, 
-        email: properties.email, 
-        phone: properties.phone, 
-        twitter: properties.twitter 
+      this.props.total_accepted = properties.total_accepted
+
+      this.props.social = {
+        facebook: properties.facebook,
+        email: properties.email,
+        phone: properties.phone,
+        twitter: properties.twitter
       };
 
-      this.props.attending = properties.attending
-      this.attending = properties.attending
-
-      
-      
       this.render = function (distance, zipcode) {
-        
         var that = this;
 
         // var endtime = that.endTime ? moment(that.endTime).format("h:mma") : null;
-
         if ( this.props.event_type === 'Group' ) {
           return that.render_group(distance, zipcode)
         } else {
           return that.render_event(distance, zipcode)
         }
       }
-      
+
       this.render_group = function(distance, zipcode) {
         var that = this;
 
-        
         var lat = that.props.lat
         var lon = that.props.lng
-        
+
         var social_html = '';
-        
-        // console.log(that.props.event_type)
+
         if (that.props.social) {
           if (that.props.social.facebook !== '') { social_html += `<a href='${that.props.social.facebook}' target='_blank'><img src='/images/icon/facebook.png' /></a>`; }
           if (that.props.social.twitter !== '') { social_html += `<a href='${that.props.social.twitter}' target='_blank'><img src='/images/icon/twitter.png' /></a>`; }
           if (that.props.social.email !== '') { social_html += `<a href='mailto:${that.props.social.email}' ><img src='/images/icon/mailchimp.png' /></a>`; }
-          if (that.props.social.phone !== '') { social_html += `&nbsp;<img src='/images/icon/phone.png' /><span>${that.props.social.phone}</span>`; }  
+          if (that.props.social.phone !== '') { social_html += `&nbsp;<img src='/images/icon/phone.png' /><span>${that.props.social.phone}</span>`; }
         }
-        
+
         var new_window = true;
-        if ( that.props.url.match(/^mailto/g) ) {
+        if ( that.props.browser_url.match(/^mailto/g) ) {
           new_window = false;
         }
-        
+
         var rendered = $("<div class=montserrat/>")
           .addClass('event-item ' + that.className)
           .html(`
@@ -93,7 +66,7 @@ var Event = (function($) { return function(properties) {
                 <span class="time-info-dist">${distance ?  distance + "mi&nbsp;&nbsp;" : ""}</span>
               </h5>
               <h3>
-                <a ${new_window ? 'target="_blank"' : ''} href="${that.props.url}">${that.props.title}</a>
+                <a ${new_window ? 'target="_blank"' : ''} href="${that.props.browser_url}">${that.props.title}</a>
               </h3>
               <span class="label-icon"></span>
               <h5 class="event-type">${that.props.event_type}</h5>
@@ -102,10 +75,10 @@ var Event = (function($) { return function(properties) {
               </div>
             </div>
             `);
-          
+
         return rendered.html();
       };
-      
+
       this.render_event = function(distance, zipcode) {
         var that = this;
 
@@ -115,8 +88,8 @@ var Event = (function($) { return function(properties) {
         var lat = that.props.lat
         var lon = that.props.lng
 
-        var attendingText = typeof that.props.attending != 'undefined' && that.props.attending > 0 ? "- " + that.props.attending + " RSVPs" : ""
-        
+        var attendingText = typeof that.props.total_accepted != 'undefined' && that.props.total_accepted > 0 ? "- " + that.props.total_accepted + " RSVPs" : ""
+
         var rendered = $("<div class=montserrat/>")
           .addClass('event-item ' + that.className)
           .html(`
@@ -128,18 +101,18 @@ var Event = (function($) { return function(properties) {
                 </div>
               </h5>
               <h3>
-                <a target="_blank" href="${that.props.url}" class="event-title">${that.props.title}</a>
+                <a target="_blank" href="${that.props.browser_url}" class="event-title">${that.props.title}</a>
               </h3>
               <span class="label-icon"></span>
               <h5 class="event-type">${that.props.event_type} ${attendingText}</h5>
               <p>${that.props.address}</p>
               <div>
-                <a class="rsvp-link" href="${that.props.url}" target="_blank" onclick="ga('send', 'event', 'Event', 'visited', '${that.props.url}');">DETAILS</a>
+                <a class="rsvp-link" href="${that.props.browser_url}" target="_blank" onclick="ga('send', 'event', 'Event', 'visited', '${that.props.browser_url}');">DETAILS</a>
                 <span class="time-info-dist" style="float: right; padding-top: 10px">${distance ?  distance + "mi&nbsp;&nbsp;" : ""}</span>
               </div>
             </div>
             `);
-          
+
         return rendered.html();
       };
     }
@@ -150,8 +123,21 @@ var Event = (function($) { return function(properties) {
  */
 var MapManager = (function($, d3, leaflet) {
   return (
-    function(eventData, campaignOffices, zipcodes, options) {
+    function(osdiEvents, campaignOffices, zipcodes, options) {
       var allFilters = window.eventTypeFilters.map(function(i) { return i.id; });
+
+      const eventData = osdiEvents['_embedded']['osdi:events']
+        .filter(function (d) {
+          return d['location']
+            && d['location']['location']
+            && d['location']['location']['latitude']
+            && d['location']['location']['longitude'];
+        });
+
+      // Fix some non-OSDI compliant dependencies
+      eventData.forEach(function (d) {
+        d.event_type = "Event";
+      });
 
       var popup = L.popup();
       var options = options;
@@ -170,7 +156,7 @@ var MapManager = (function($, d3, leaflet) {
               maxZoom: 18,
               attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy;<a href="https://carto.com/attribution">CARTO</a>'
             });
-            
+
       var CAMPAIGN_OFFICE_ICON = L.icon({
           iconUrl: '/images/icon/star.png',
           iconSize:     [17, 14], // size of the icon
@@ -210,8 +196,8 @@ var MapManager = (function($, d3, leaflet) {
           return target.lat == d.props.LatLng[0] &&
                  target.lng == d.props.LatLng[1] &&
                  (!current_filters || current_filters.length == 0
-                    || $(d.properties.filters).not(current_filters).length != d.properties.filters.length);
-        }).sort(function(a, b) { return b.props.attending - a.props.attending; });
+                    || $(d.props.filters).not(current_filters).length != d.props.filters.length);
+        }).sort(function(a, b) { return b.props.total_accepted - a.props.total_accepted; });
 
         var div = $("<div />")
           .append(filtered.length > 1 ? "<h3 class='sched-count'>" + filtered.length + " Results</h3>" : "")
@@ -227,7 +213,7 @@ var MapManager = (function($, d3, leaflet) {
                                 var events_attended = events_attended_raw ? JSON.parse(events_attended_raw) : [];
                                 return $.inArray(prop.id_obfuscated, events_attended) > -1;
 
-                              })(d.properties))
+                              })(d.props))
                             .addClass(d.isFull?"is-full":"not-full")
                             .addClass(d.visible ? "is-visible" : "not-visible")
                             .append(d.render());
@@ -235,7 +221,6 @@ var MapManager = (function($, d3, leaflet) {
               )
             )
           );
-
 
         setTimeout(
           function() { L.popup()
@@ -246,53 +231,28 @@ var MapManager = (function($, d3, leaflet) {
         , 100);
       };
 
-
-
     /***
      * Initialization
      */
     var initialize = function() {
       var uniqueLocs = eventsList.reduce(function(arr, item){
-        var className = item.properties.filters.join(" ");
-        if ( arr.indexOf(item.properties.lat + "||" + item.properties.lng + "||" + className + '||' + item.props.attending) >= 0 ) {
+        var className = item.props.filters.join(" ");
+        if ( arr.indexOf(item.props.lat + "||" + item.props.lng + "||" + className + '||' + item.props.total_accepted) >= 0 ) {
           return arr;
         } else {
-          arr.push(item.properties.lat  + "||" +  item.properties.lng + "||" + className + '||' + item.props.attending);
+          arr.push(item.props.lat  + "||" +  item.props.lng + "||" + className + '||' + item.props.total_accepted);
           return arr;
         }
       }, []);
 
-
-
-
       uniqueLocs = uniqueLocs.map(function(d) {
         var split = d.split("||");
         return { latLng: [ parseFloat(split[0]), parseFloat(split[1])],
-                 className: split[2], attending: split[3] };
+                 className: split[2], total_accepted: split[3] };
       });
 
-
-
-
       uniqueLocs.forEach(function(item) {
-        
-         // setTimeout(function() {
-          // if (item.className == "campaign-office") {
-          //   L.marker(item.latLng, {icon: CAMPAIGN_OFFICE_ICON, className: item.className})
-          //     .on('click', function(e) { _popupEvents(e); })
-          //     .addTo(offices);
-          // } else if (item.className == "gotv-center") {
-          //   L.marker(item.latLng, {icon: GOTV_CENTER_ICON, className: item.className})
-          //     .on('click', function(e) { _popupEvents(e); })
-          //     .addTo(gotvCenter);
-          // }else 
-          // if (item.className.match(/bernie\-event/ig)) {
-          //   L.circleMarker(item.latLng, { radius: 12, className: item.className, color: 'white', fillColor: '#F55B5B', opacity: 0.8, fillOpacity: 0.7, weight: 2 })
-          //     .on('click', function(e) { _popupEvents(e); })
-          //     .addTo(overlays);
-          // }
-
-          if(item.attending > 2000 && item.className == 'event' ) {
+          if(item.total_accepted > 2000 && item.className == 'event' ) {
             L.marker(item.latLng, {icon: new L.Icon({
               iconUrl: '/images/pin.png',
               iconRetinaUrl: '/images/pin-2x.png',
@@ -309,7 +269,7 @@ var MapManager = (function($, d3, leaflet) {
             L.circleMarker(item.latLng, { radius: 5, className: item.className, color: 'white', fillColor: 'black', opacity: 0.8, fillOpacity: 0.7, weight: 2 })
               .on('click', function(e) { _popupEvents(e); })
               .addTo(overlays);
-          } 
+          }
           else if (item.className == 'group') {
             L.circleMarker(item.latLng, { radius: 4, className: item.className, color: 'white', fillColor: 'lightgray', opacity: 0.6, fillOpacity: 0.9, weight: 2 })
             .on('click', function(e) { _popupEvents(e); })
@@ -338,7 +298,7 @@ var MapManager = (function($, d3, leaflet) {
         var dist = toMile(zipLatLng.distanceTo(d.props.LatLng));
 
         if (dist < distance) {
-          
+
           d.distance = Math.round(dist*10)/10;
 
           //If no filter was a match on the current filter
@@ -370,7 +330,7 @@ var MapManager = (function($, d3, leaflet) {
           break;
         case 'attendance':
           ga('send', 'event', 'Sort', 'type', 'attendance');
-          filteredEvents = filteredEvents.sort(function(a,b) { return b.props.attending - a.props.attending; });
+          filteredEvents = filteredEvents.sort(function(a,b) { return b.props.total_accepted - a.props.total_accepted; });
           break;
         default:
           ga('send', 'event', 'Sort', 'type', 'time');
@@ -476,11 +436,11 @@ var MapManager = (function($, d3, leaflet) {
       //Render event
       var eventList = d3.select("#event-list")
         .selectAll("li")
-        .data(filtered, function(d){ return d.props.url; });
+        .data(filtered, function(d){ return d.props.browser_url; });
 
         eventList.enter()
           .append("li")
-          .attr("data-attending", function(d, id) {  return $.inArray(d.properties.id_obfuscated, events_attended) > -1;  })
+          .attr("data-attending", function(d, id) {  return $.inArray(d.props.id_obfuscated, events_attended) > -1;  })
           .attr("class", function(d) { return (d.isFull ? 'is-full' : 'not-full') + " " + (this.visible ? "is-visible" : "not-visible")})
           .classed("lato", true)
           .html(function(d){ return d.render(d.distance); });
@@ -580,11 +540,11 @@ var MapManager = (function($, d3, leaflet) {
       //Render event
       var eventList = d3.select("#event-list")
         .selectAll("li")
-        .data(filtered, function(d){ return d.props.url; });
+        .data(filtered, function(d){ return d.props.browser_url; });
 
         eventList.enter()
           .append("li")
-          .attr("data-attending", function(d, id) {  return $.inArray(d.props.address + ' ' + d.props.start_datetime, events_attended) > -1;  })
+          .attr("data-attending", function(d, id) {  return $.inArray(d.props.address + ' ' + d.props.start_date, events_attended) > -1;  })
           .attr("class", function(d) { return (d.isFull ? 'is-full' : 'not-full') + " " + (this.visible ? "is-visible" : "not-visible")})
           .classed("lato", true)
           .html(function(d){ return d.render(d.distance); });

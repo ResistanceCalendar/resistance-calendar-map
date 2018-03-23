@@ -192,7 +192,10 @@ $.ajax({
          function(zipcodes) {
            $("#loading-icon").hide();
           //Clean data
-          window.EVENT_DATA.forEach(function(d) {
+          window.EVENT_DATA['_embedded']['osdi:events'].forEach(function(d) {
+            // Not actual OSDI but required as part of the rending for now
+            d.event_type = "Event";
+
             d.filters = [];
             //Set filter info
             switch(d.event_type) {
